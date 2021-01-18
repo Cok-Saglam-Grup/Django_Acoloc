@@ -14,6 +14,8 @@ def showmap(request):
     return render(request, 'AcaLoc/map.html', {})
 
 
+def recommended(request):
+    return render(request,'AcaLoc/recommended.html',{})
 
 def deneme(request, *args, **kwargs):
     obj = Academician.objects.all()
@@ -109,9 +111,8 @@ def home(request):
                 liste.append(i.buildings.latitude)
         #print(liste)
 
-        myloc = geocoder.ip('me')
-        lonlat = myloc
-        coordinates = [liste,[myloc.lng,myloc.lat]]
+        lonlat = [32.733684, 39.872636]
+        coordinates = [liste,lonlat]
         # directions
         route = client.directions(coordinates=coordinates,
                                   profile='foot-walking',
@@ -135,3 +136,4 @@ def home(request):
         print(hasempty, "out of if statement")
 
         return render(request, 'AcaLoc/home.html', context)
+
